@@ -4,6 +4,7 @@ import Login from './pages/Login';
 import NavbarComponent from './components/NavbarComponent';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
+import Products from './pages/Products';
 
 function App() {
   const [isLoggedIn, setLoggedIn] = useState(false);
@@ -25,6 +26,7 @@ function App() {
           <NavbarComponent onLogout={handleLogut} />
           <Routes>
             <Route path='/home' element={<Home />}/>
+            <Route path='/home/products' element={<Products />}/>
           </Routes>
         </BrowserRouter>
       ) : (

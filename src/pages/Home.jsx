@@ -2,12 +2,14 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import CardComponent from "../components/CardComponent";
+import { Link } from "react-router-dom";
+import AgGridComponent from "../components/AgGridComponent";
 
 const Home = () => {
   return (
     <Container>
       <Row>
-        <Col>
+        <Col as={Link} to={"/home/products"}>
           <CardComponent title={"Product Catalog"} />
         </Col>
         <Col>
