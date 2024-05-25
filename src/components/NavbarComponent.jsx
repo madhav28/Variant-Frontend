@@ -9,8 +9,9 @@ const NavbarComponent = ({ loginState }) => {
     const navigate = useNavigate();
     const handleLogoutClick = () => {
         loginState.setLoggedIn(false);
+        localStorage.setItem("IsLoggedIn", "false");
         //Hard-coded cookie name. Make sure it is in sync with CookieUtil in backend.
-        Cookies.remove("JWT");
+        Cookies.remove("jwtToken");
         navigate('/login');
     }
 

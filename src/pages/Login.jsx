@@ -13,7 +13,9 @@ const Login = ({loginState}) => {
         const response = await login({username, password});
         if(response.success) {
             loginState.setLoggedIn(true);
-            navigate('/inventory');
+            //Temporary hard-coded string. need to find a long-term solution. Make sure it is in sync across the project.
+            localStorage.setItem("IsLoggedIn", "true");
+            navigate('/home');
         }
     };
 

@@ -1,23 +1,22 @@
-import {getRequestJson, handleError, handleResponse} from "../utils/apiUtils";
 import {BACKEND_URL} from "../config";
+import axios from "axios";
+const axiosInstance = axios.create({withCredentials: true});
 
 export async function signup(details) {
-    return fetch(BACKEND_URL + "/signup", getRequestJson("POST", details))
+    return axiosInstance.post(BACKEND_URL + "/signup", details)
         .then((resp) => {
-            return resp.json();
+            return resp.data;
         });
 }
 
-export async function login(creds, userType) {
-    return fetch(BACKEND_URL + "/login", getRequestJson("POST", creds))
-        .then(handleResponse)
-        .catch(handleError);
+export async function login(credentials) {
+    return axiosInstance.post(BACKEND_URL + "/login", credentials)
+        .then((resp) => {
+            return resp.data;
+        })
+        .catch((error) => {
+            console.log(error);
+            alert("Something went wrong. check console.");
+            return null;
+        });
 }
-
-// export function signout() {
-//     return fetch(BACKEND_URL + "/signout", getRequestJson("POST", null))
-//         .then((response) => {
-//             console.log(response);
-//         })
-//         .catch(handleError);
-// }
