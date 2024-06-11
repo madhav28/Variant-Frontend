@@ -1,12 +1,22 @@
 import React, { useState } from 'react';
 import { Form, Button, Container } from 'react-bootstrap';
+import {login} from "../api/authApi";
+import {useNavigate} from "react-router-dom";
 
-const Login = ({ onLogin }) => {
-    const [username, setUsername] = useState('username');
-    const [password, setPassword] = useState('password');
+const Login = ({loginState}) => {
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+
+    const navigate = useNavigate();
   
-    const handleLoginClick = () => {
-      onLogin(username, password);
+    const handleLoginClick = async () => {
+        const response = await login({username, password});
+        if(response.success) {
+            loginState.setLoggedIn(true);
+            //Temporary hard-coded string. need to find a long-term solution. Make sure it is in sync across the project.
+            localStorage.setItem("IsLoggedIn", "true");
+            navigate('/home');
+        }
     };
 
   return (

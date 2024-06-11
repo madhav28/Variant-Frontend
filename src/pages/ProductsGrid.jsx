@@ -1,6 +1,6 @@
 import AgGridComponent from "../components/AgGridComponent";
 import { useEffect, useState } from "react";
-import axios from "axios";
+import {loadInventory} from "../api/inventoryApi";
 
 const ProductsGrid = () => {
   const colDefs = [
@@ -21,10 +21,14 @@ const ProductsGrid = () => {
   const [rowData, setRowData] = useState(null);
 
   useEffect(() => {
-    axios
-      .get("/inventories")
-      .then((response) => setRowData(response.data.content))
-      .catch((error) => console.error("Error fetching data:", error));
+    async function fetchData() {
+      const data = await loadInventory();
+      if (data) {
+        setRowData(data);
+      }
+    }
+    fetchData();
+
   }, []);
 
   return <AgGridComponent rowData={rowData} colDefs={colDefs} />;

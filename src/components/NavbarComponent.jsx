@@ -2,12 +2,18 @@ import React from "react";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import Cookies from 'js-cookie';
 
-const NavbarComponent = ({ onLogout }) => {
-  const handleLogoutClick = () => {
-    onLogout();
-  };
+const NavbarComponent = ({ loginState }) => {
+    const navigate = useNavigate();
+    const handleLogoutClick = () => {
+        loginState.setLoggedIn(false);
+        localStorage.setItem("IsLoggedIn", "false");
+        //Hard-coded cookie name. Make sure it is in sync with CookieUtil in backend.
+        Cookies.remove("jwtToken");
+        navigate('/login');
+    }
 
   return (
     <div>
