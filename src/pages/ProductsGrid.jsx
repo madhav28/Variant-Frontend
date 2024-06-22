@@ -1,6 +1,6 @@
 import AgGridComponent from "../components/AgGridComponent";
 import { useEffect, useState } from "react";
-import {loadInventory} from "../api/inventoryApi";
+import { loadInventory } from "../api/inventoryApi";
 
 const ProductsGrid = () => {
   const colDefs = [
@@ -28,7 +28,6 @@ const ProductsGrid = () => {
       }
     }
     fetchData();
-
   }, []);
 
   return <AgGridComponent rowData={rowData} colDefs={colDefs} />;

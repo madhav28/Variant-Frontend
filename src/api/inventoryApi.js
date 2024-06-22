@@ -14,3 +14,16 @@ export async function loadInventory() {
             return null;
         });
 }
+
+export async function createInventory(dataObj) {
+    const axiosInstance = axios.create({withCredentials: true});
+    return axiosInstance.post(BACKEND_URL + "/inventory", dataObj)
+        .then((response) => {
+            console.log(response);
+        })
+        .catch((error) => {
+            console.log(error);
+            alert("Something went wrong. check console.");
+            return null;
+        });
+}
